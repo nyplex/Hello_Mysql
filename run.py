@@ -1,5 +1,4 @@
-import os
-from sqlite3 import connect
+import datetime
 import pymysql
 
 username = "root"
@@ -13,10 +12,12 @@ connection = pymysql.connect(host='localhost',
 
 try:
     with connection.cursor() as cursor:
-        sql = "SELECT * FROM Artist;"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        print(result)
+        rows = [(18, 'Bob'),
+                (34, 'Jim'),
+                (95, 'Albert')]
+        cursor.execute("DELETE FROM Friends WHERE name = 'Bob';")
+        connection.commit()
+        
 finally:
     connection.close()
 
